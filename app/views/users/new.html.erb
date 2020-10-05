@@ -1,0 +1,52 @@
+<!-- <form action="/users" method="post" accept-charset="UTF-8">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="name">Name:</label><br>
+    <input type="text" name='user[username]'><br>
+    <label for="Email">Email:</label><br>
+    <input type="text" name='user[email]'><br>
+    <label for="password">Password:</label><br>
+    <input type="password" name='user[password]'><br>
+    <label for="password_confirmation">Password Confirmation:</label><br>
+    <input type="password" name='password_confirmation'><br>
+    <input type="submit" value="Submit">
+</form> -->
+
+<%#= "Example" %>
+
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_with(url:"/users", model: @user, local:true, method:"post") do |f| %>
+
+    <p>
+        <%= f.label(:username) %>
+        <%= f.text_field( :username) %>
+    </p>
+    <p>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+    </p>
+    <p>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </p>
+    <p>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+    </p>
+
+    <p>
+        <%= f.submit "Submit" %>
+    </p>
+<% end %>
