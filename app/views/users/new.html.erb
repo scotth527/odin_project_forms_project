@@ -11,8 +11,29 @@
     <input type="submit" value="Submit">
 </form> -->
 
-<%#= "Example" %>
-
+<!-- Commented out -->
+<% if false %>
+    <%= form_tag("/users", method: "post") do %>
+      <p>
+          <%= label_tag(:username) %>
+          <%= text_field_tag(:user, :username) %>
+      </p>
+      <p>
+          <%= label_tag(:email) %>
+          <%= text_field_tag(:user, :email, nil, placeholder:"email@email.com") %>
+      </p>
+      <p>
+          <%= label_tag(:password) %>
+          <%= password_field_tag(:user, :password) %>
+      </p>
+      <p>
+          <%= label_tag(:password_confirmation, "BOOGIE WOOGIE") %>
+          <%= password_field_tag(:user, :password_confirmation ) %>
+      </p>
+      <%= submit_tag("Submit") %>
+    <% end %>
+<% end %>
+<%# Commented out %>
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -30,12 +51,12 @@
 <%= form_with(url:"/users", model: @user, local:true, method:"post") do |f| %>
 
     <p>
-        <%= f.label(:username) %>
+        <%= f.label(:username, "Enter your username here") %>
         <%= f.text_field( :username) %>
     </p>
     <p>
         <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, placeholder:"email@email.com" %>
     </p>
     <p>
         <%= f.label :password %>
@@ -50,3 +71,5 @@
         <%= f.submit "Submit" %>
     </p>
 <% end %>
+
+<%= link_to "<< Back to Users List", users_path %>
